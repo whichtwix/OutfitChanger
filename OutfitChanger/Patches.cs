@@ -56,6 +56,14 @@ public class Patches
 		}
 	}
 
+	[HarmonyPatch(typeof(ModManager), nameof(ModManager.LateUpdate))]
+	[HarmonyPostfix]
+
+	public static void Postfix(ModManager __instance)
+	{
+		__instance.ShowModStamp();
+	}
+
 	public static void SetOutfit(Customization outfit)
 	{
 		PlayerControl.LocalPlayer.CmdCheckColor((byte)outfit.colorID);

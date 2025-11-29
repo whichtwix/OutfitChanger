@@ -30,13 +30,15 @@ public class Patches
 
 			Outfits.Add(root.customization);
 		}
+
+		OutfitChangerPlugin.Logger.LogWarning($"{Outfits.Count} outfits found");
 	}
 
 	[HarmonyPatch(typeof(PlayerCustomizationMenu), nameof(PlayerCustomizationMenu.Update))]
 
 	public static void Postfix(PlayerCustomizationMenu __instance)
 	{
-		if (Input.GetKeyDown(KeyCode.LeftArrow))
+		if (CheckInput(true))
 		{
 			CurrentPage--;
 			CurrentPage = CurrentPage < 0 ? Outfits.Count - 1 : CurrentPage;
@@ -45,7 +47,7 @@ public class Patches
 
 			__instance.PreviewArea.UpdateFromLocalPlayer(PlayerMaterial.MaskType.None);
 		}
-		else if (Input.GetKeyDown(KeyCode.RightArrow))
+		else if (CheckInput(false))
 		{
 			CurrentPage++;
 			CurrentPage = CurrentPage > Outfits.Count - 1 ? 0 : CurrentPage;
@@ -73,6 +75,39 @@ public class Patches
 		PlayerControl.LocalPlayer.RpcSetVisor(outfit.visor ?? "visor_EmptyVisor");
 		PlayerControl.LocalPlayer.RpcSetNamePlate(outfit.namePlate ?? "nameplate_NoPlate");
 		PlayerControl.LocalPlayer.CmdCheckName(outfit.name ?? "where name");
+	}
+
+	public static bool CheckInput(bool toleft)
+	{
+#if !ANDROID
+		if (toleft)
+		{
+			return Input.GetKeyDown(KeyCode.LeftArrow);
+		}
+
+		return Input.GetKeyDown(KeyCode.RightArrow);
+#endif
+
+		var controller = PassiveButtonManager.Instance.controller;
+
+		if (controller.AnyTouchUp)
+		{
+			var touch = controller.Touches[0];
+			var start = touch.DownAt;
+			var end = touch.Position;
+			var movement = end - start;
+
+			if (movement.x < -1 && toleft)
+			{
+				return true;
+			}
+			else if (movement.x > 1 && !toleft)
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
 

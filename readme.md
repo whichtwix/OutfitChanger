@@ -4,19 +4,19 @@ OutfitChanger is a utility Among Us mod to quickly switch through saved outfits.
 
 ## Outfit Folder
 
-You will need to have a folder where the *.amogus files are saved. By default this is ```%Appdata%\Locallow\Innersloth\Among Us\Outfits``` but can be changed. This folder will be generated
+You will need to have a folder where the *.amogus files are saved. By default this is ```%Appdata%\Locallow\Innersloth\Among Us\Outfits``` on PC or ```Android\data\dev.allofus.starlight\files\Outfits``` on Android but can be changed. This folder will be generated
 when you open the game. *.amogus files can be named whatever you want.
 
-To change the folder, go to your ```among us folder\Bepinex\Config\OutfitChanger.cfg``` and change the folder path.
+To change the folder, go to your ```among us folder\Bepinex\Config\OutfitChanger.cfg``` if on PC and change the folder path. If you are on Android, go to ```Android\data\dev.allofus.starlight\files\profiles```, go into the profile that uses outfitchanger, then ```Config\Outfitchanger.cfg```.
 
 ## Making The Files
 
 1. Firstly, go into the game and choose the cosmetics you wish.
-2. Go to ```%Appdata%\Locallow\Innersloth\Among Us``` and copy the player.amogus file to your outfits folder with a new file name but with the same .amogus extension.
+2. Go to ```%Appdata%\Locallow\Innersloth\Among Us``` on PC or ```Android\data\dev.allofus.starlight\files``` on Android and copy the player.amogus file to your outfits folder with a new file name but with the same .amogus extension.
 
 ## Switching Outfits
 
-To switch Outfits, go to the cosmetics menu and use arrow keys
+To switch Outfits, go to the cosmetics menu and use arrow keys if you are on PC or swipe left or right with your finger on Android.
 
 ## Other Notes
 

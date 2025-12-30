@@ -1,0 +1,15 @@
+{
+  "Name": "OutfitChanger",
+  "Description": "A utility mod to switch between outfits when you have so many to choose from",
+  "Tags": [
+    "Utility",
+    "Cosmetics"
+  ],
+  "License": "GPLv3",
+  "Authors": [
+    "whichtwix"
+  ],
+  "Links": {
+    "Source": "https://github.com/whichtwix/OutfitChanger"
+  }
+}

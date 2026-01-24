@@ -38,6 +38,8 @@ public class Patches
 
 	public static void Postfix(PlayerCustomizationMenu __instance)
 	{
+		if (Outfits.Count == 0) return;
+		
 		if (CheckInput(true))
 		{
 			CurrentPage--;
@@ -79,14 +81,12 @@ public class Patches
 
 	public static bool CheckInput(bool toleft)
 	{
-#if !ANDROID
-		if (toleft)
+		switch (toleft)
 		{
-			return Input.GetKeyDown(KeyCode.LeftArrow);
+			case true when Input.GetKeyDown(KeyCode.LeftArrow):
+			case false when Input.GetKeyDown(KeyCode.RightArrow):
+				return true;
 		}
-
-		return Input.GetKeyDown(KeyCode.RightArrow);
-#endif
 
 		var controller = PassiveButtonManager.Instance.controller;
 

@@ -14,6 +14,8 @@ To change the folder, go to your ```among us folder\Bepinex\Config\OutfitChanger
 1. Firstly, go into the game and choose the cosmetics you wish.
 2. Go to ```%Appdata%\Locallow\Innersloth\Among Us``` on PC or ```Android\data\dev.allofus.starlight\files``` on Android and copy the player.amogus file to your outfits folder with a new file name but with the same .amogus extension.
 
+You can also use ```/fitsave``` in the chat when in lobby
+
 ## Switching Outfits
 
 To switch Outfits, go to the cosmetics menu and use arrow keys if you are on PC or swipe left or right with your finger on Android.

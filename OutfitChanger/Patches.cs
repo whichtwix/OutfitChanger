@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -68,6 +69,33 @@ public class Patches
 		__instance.ShowModStamp();
 	}
 
+	[HarmonyPatch(typeof(ChatController), nameof(ChatController.SendChat))]
+	[HarmonyPrefix]
+
+	public static bool Prefix(ChatController __instance)
+	{
+		if (!LobbyBehaviour.Instance) return true;
+		
+		string file = Path.Combine(Application.persistentDataPath, "player.amogus");
+		if (__instance.freeChatField.Text.StartsWith("/fitsave", StringComparison.OrdinalIgnoreCase))
+		{
+			for (int i = 1; i < int.MaxValue; i++)
+			{
+				var dest = Path.Combine(OutfitChangerPlugin.OutfitFolder.Value, $"outfit{i}.amogus");
+				
+				if (!File.Exists(dest))
+				{
+					File.Copy(file, dest);
+					__instance.freeChatField.Clear();
+					__instance.UpdateChatMode();
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+
 	public static void SetOutfit(Customization outfit)
 	{
 		PlayerControl.LocalPlayer.CmdCheckColor((byte)outfit.colorID);
@@ -76,7 +104,11 @@ public class Patches
 		PlayerControl.LocalPlayer.RpcSetSkin(outfit.skin ?? "skin_None");
 		PlayerControl.LocalPlayer.RpcSetVisor(outfit.visor ?? "visor_EmptyVisor");
 		PlayerControl.LocalPlayer.RpcSetNamePlate(outfit.namePlate ?? "nameplate_NoPlate");
-		PlayerControl.LocalPlayer.CmdCheckName(outfit.name ?? "where name");
+		
+		if (AmongUsClient.Instance.AmHost)
+		{
+			PlayerControl.LocalPlayer.CmdCheckName(outfit.name ?? "where name");
+		}
 	}
 
 	public static bool CheckInput(bool toleft)

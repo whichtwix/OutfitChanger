@@ -3,7 +3,7 @@
 		<TargetFramework>net6.0</TargetFramework>
         <LangVersion>latest</LangVersion>
         <DebugType>embedded</DebugType>
-        <VersionPrefix>1.1.0</VersionPrefix>
+        <VersionPrefix>1.2.0</VersionPrefix>
         <VersionSuffix>dev</VersionSuffix>
         <Description>Mod generated using Reactor Template</Description>
         <!-- <Authors>your name</Authors> -->
